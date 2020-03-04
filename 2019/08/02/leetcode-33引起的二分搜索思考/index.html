@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="leetcode,算法,二分,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="leetcode 33引起的二分搜索思考 由二分引发的血案。  前段时间做过一道二分的变体，leetcode 33, 对里面一个用二分搜索来搜shifted的位置的方法印象很深。 顺便提一下，其实我觉得大部分人对于二分的理解应该是不够的，结果就是手写的时候被各种edge case卡到（包括我），一个比较好的理解二分搜索的文章在这里 对于一个顺序被shift过的排序arr，其样子应该是以下几种情况之">
+<meta name="keywords" content="leetcode,算法,二分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode 33引起的二分搜索思考">
+<meta property="og:url" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/index.html">
+<meta property="og:site_name" content="stultus library">
+<meta property="og:description" content="leetcode 33引起的二分搜索思考 由二分引发的血案。  前段时间做过一道二分的变体，leetcode 33, 对里面一个用二分搜索来搜shifted的位置的方法印象很深。 顺便提一下，其实我觉得大部分人对于二分的理解应该是不够的，结果就是手写的时候被各种edge case卡到（包括我），一个比较好的理解二分搜索的文章在这里 对于一个顺序被shift过的排序arr，其样子应该是以下几种情况之">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564735981253.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564736216761.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564736964648.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564737269936.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564741720375.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564741625079.png">
+<meta property="og:updated_time" content="2020-01-29T09:48:29.693Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode 33引起的二分搜索思考">
+<meta name="twitter:description" content="leetcode 33引起的二分搜索思考 由二分引发的血案。  前段时间做过一道二分的变体，leetcode 33, 对里面一个用二分搜索来搜shifted的位置的方法印象很深。 顺便提一下，其实我觉得大部分人对于二分的理解应该是不够的，结果就是手写的时候被各种edge case卡到（包括我），一个比较好的理解二分搜索的文章在这里 对于一个顺序被shift过的排序arr，其样子应该是以下几种情况之">
+<meta name="twitter:image" content="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/1564735981253.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/">
+
+
+
+<meta name="google-site-verification" content="_bl10zsYCdhg6gfYlPYwQEJjbwHSQIrDlQlACLW0c3Y">
+
+  <title>leetcode 33引起的二分搜索思考 | stultus library</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">stultus library</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">愚者图书馆</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="duskcloudxu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stultus library">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcode 33引起的二分搜索思考</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T18:40:13-07:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/02/leetcode-33引起的二分搜索思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/02/leetcode-33引起的二分搜索思考/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="leetcode-33引起的二分搜索思考"><a href="#leetcode-33引起的二分搜索思考" class="headerlink" title="leetcode 33引起的二分搜索思考"></a>leetcode 33引起的二分搜索思考</h1><blockquote>
+<p>由二分引发的血案。</p>
+</blockquote>
+<p>前段时间做过一道二分的变体，<a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">leetcode 33</a>, 对里面一个用二分搜索来搜shifted的位置的方法印象很深。</p>
+<p>顺便提一下，其实我觉得大部分人对于二分的理解应该是不够的，结果就是手写的时候被各种edge case卡到（包括我），一个比较好的理解二分搜索的文章在<a href="https://www.zhihu.com/question/36132386" target="_blank" rel="noopener">这里</a></p>
+<p>对于一个顺序被shift过的排序<code>arr</code>，其样子应该是以下几种情况之一：</p>
+<ul>
+<li>1234567</li>
+<li>2345671</li>
+<li>3456712</li>
+<li>4567123</li>
+<li>5671234</li>
+<li>6712345</li>
+<li>7123456</li>
+</ul>
+<p>观察上述数列，我们可以认识到一件事情<strong>当最左边的数字小于最右边的时候，中间的数列必然是连续上升的</strong></p>
+<p>这个性质是因为原数组的上升特性导致的，如图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="1564735981253.png" alt="1564735981253"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shift</span><span class="params">(arr,n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> arr[n:]+arr[:n]</span><br><span class="line">shift(a,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1564736216761.png" alt="1564736216761"></p>
+<p>以上是shift()过后的图形。</p>
+<p>通过脑补我们可以认识到，任何的平移都不可能改变这个数组的上述性质。然后用这个特质，我们就可以对shift过的数组进行二分搜索，找出原来数组的开头在哪里。</p>
+<p>那么如果我们把<code>left</code>设为$0$, <code>right</code>设为$arr.length-1$，<code>mid</code>为<code>left+(right-left)//2</code>, 那么就有以下情况：</p>
+<ul>
+<li><code>arr[left]</code>&lt;<code>arr[mid]</code>&lt;<code>arr[right]</code></li>
+<li><code>arr[right]</code>&lt;<code>arr[left]</code>&lt;<code>arr[mid]</code></li>
+<li><code>arr[mid]</code>&lt;<code>arr[right]</code>&lt;<code>arr[left]</code></li>
+</ul>
+<blockquote>
+<p>可以思考一下为什么没有其他情况</p>
+</blockquote>
+<p>对上述情况进行讨论，如果说一开始是第一种情况，那我们很明显就能发下这个数组的shift value是0。</p>
+<p>对于第二种情况，也就是中间值大于左边值，那么我们找到的这个<code>mid</code>肯定在一开始的头前面，差不多是如下的位置：</p>
+<p><img src="1564736964648.png" alt="1564736964648"></p>
+<p>那在这种情况下，我们只需要对$[mid,R_0]$再次搜索就好，如图：</p>
+<p><img src="1564737269936.png" alt="1564737269936"></p>
+<p>那么，如果是第三种情况，即：<code>arr[mid]</code>&lt;<code>arr[right]</code>&lt;<code>arr[left]</code>呢？</p>
+<p>类似的，我们可以知道我们的搜索范围是这种情况：</p>
+<p><img src="1564741720375.png" alt="1564741720375"></p>
+<p>那我们下一次搜索的范围就是：$[L_0,mid ]$</p>
+<p>这种搜索最后将会收敛于一种情况, 即$[left,left+1]$(或者$[right-1,right]$),在这个时候做一个特殊判断就行了。</p>
+<p><img src="1564741625079.png" alt="1564741625079"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们将一个shift过的数组分为两个区间</p>
+<ul>
+<li>$[L_0,left]$, 这个区间中所有的数字大于$arr[right]$</li>
+<li>$[right,R_0]$, 这个区间中的所有数字大于等于$arr[right]$,小于等于$arr[R_0]$</li>
+<li>那么显然，当left+1=right的时候整个数组被分配完毕，我们要找的就是这个时候的$right$了</li>
+</ul>
+<p>演示代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shift</span><span class="params">(arr,n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> arr[n:]+arr[:n]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findOriStart</span><span class="params">(arr,left,right)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(left==right<span class="number">-1</span>):<span class="keyword">return</span> right</span><br><span class="line">    <span class="keyword">if</span>(arr[left]&lt;arr[right]):<span class="keyword">return</span> left</span><br><span class="line">    mid=left+(right-left)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(arr[left]&lt;arr[mid]):<span class="keyword">return</span> findOriStart(arr,mid,right)</span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> findOriStart(arr,left,mid)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</span><br><span class="line">    a=shift(a,<span class="number">1</span>);</span><br><span class="line">    print(<span class="string">'for '</span>,a, <span class="string">' the start is %d'</span>%findOriStart(a,<span class="number">0</span>,len(a)<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<p>然后写完这篇以后去用py重新试了leetcode 33（刚学，写得丑轻拍）, 被edge case卡成傻逼……最后就small case暴力解了(你list里找一个东西竟然可以报exception我是真没脾气（逃）)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#small case讨论</span></span><br><span class="line">        <span class="keyword">if</span>(len(nums)&lt;<span class="number">3</span>):</span><br><span class="line">            res=<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">try</span>: <span class="keyword">return</span> nums.index(target)</span><br><span class="line">            <span class="keyword">except</span>:<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        startInd=(findOriStart(nums,<span class="number">0</span>,len(nums)<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">return</span> binarySearch(nums,target,startInd)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(arr,target,SI)</span>:</span></span><br><span class="line">    left=<span class="number">0</span></span><br><span class="line">    right=len(arr)</span><br><span class="line">    <span class="keyword">if</span>(arr[trans(left,SI,len(arr))]&gt;target):<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;right):</span><br><span class="line">        mid=left+(right-left)//<span class="number">2</span></span><br><span class="line">        realMid=trans(mid,SI,len(arr));</span><br><span class="line">        <span class="keyword">if</span>(arr[realMid]&lt;target):left=mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span>: right=mid</span><br><span class="line">    <span class="keyword">if</span>(right==len(arr) <span class="keyword">or</span> arr[trans(right,SI,len(arr))]!=target):<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> trans(left,SI,len(arr))</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans</span><span class="params">(cur,startInd,length)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (cur+startInd)%length</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findOriStart</span><span class="params">(arr,left,right)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(left==right):<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(left==right<span class="number">-1</span>):<span class="keyword">return</span> right</span><br><span class="line">    <span class="keyword">if</span>(arr[left]&lt;arr[right]):<span class="keyword">return</span> left</span><br><span class="line">    mid=left+(right-left)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(arr[left]&lt;arr[mid]):<span class="keyword">return</span> findOriStart(arr,mid,right)</span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> findOriStart(arr,left,mid)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/二分/" rel="tag"># 二分</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/01/菠萝咕噜肉/" rel="next" title="菠萝咕噜肉">
+                <i class="fa fa-chevron-left"></i> 菠萝咕噜肉
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/15/firebase-debug-report/" rel="prev" title="firebase debug report">
+                firebase debug report <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="duskcloudxu">
+            
+              <p class="site-author-name" itemprop="name">duskcloudxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/duskcloudxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cmbjx1@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <div></div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-33引起的二分搜索思考"><span class="nav-number">1.</span> <span class="nav-text">leetcode 33引起的二分搜索思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.0.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duskcloudxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://stultuslibrary.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://duskcloudxu.github.io/2019/08/02/leetcode-33引起的二分搜索思考/';
+          this.page.identifier = '2019/08/02/leetcode-33引起的二分搜索思考/';
+          this.page.title = 'leetcode 33引起的二分搜索思考';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://stultuslibrary.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"]  ], processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

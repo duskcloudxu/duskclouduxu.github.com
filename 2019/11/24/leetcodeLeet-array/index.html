@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="刷题,Leetcode,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="List             基础       27 Remove Element 视频讲解 Done    26 Remove Duplicates from Sorted Array 视频讲解 Done    80 Remove Duplicates from Sorted Array II 视频讲解 Done    277 Find the Celebrity 视频讲解 Prime">
+<meta name="keywords" content="刷题,Leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcodeList-array">
+<meta property="og:url" content="http://duskcloudxu.github.io/2019/11/24/leetcodeLeet-array/index.html">
+<meta property="og:site_name" content="stultus library">
+<meta property="og:description" content="List             基础       27 Remove Element 视频讲解 Done    26 Remove Duplicates from Sorted Array 视频讲解 Done    80 Remove Duplicates from Sorted Array II 视频讲解 Done    277 Find the Celebrity 视频讲解 Prime">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg">
+<meta property="og:updated_time" content="2020-01-29T09:48:29.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcodeList-array">
+<meta name="twitter:description" content="List             基础       27 Remove Element 视频讲解 Done    26 Remove Duplicates from Sorted Array 视频讲解 Done    80 Remove Duplicates from Sorted Array II 视频讲解 Done    277 Find the Celebrity 视频讲解 Prime">
+<meta name="twitter:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://duskcloudxu.github.io/2019/11/24/leetcodeLeet-array/">
+
+
+
+<meta name="google-site-verification" content="_bl10zsYCdhg6gfYlPYwQEJjbwHSQIrDlQlACLW0c3Y">
+
+  <title>leetcodeList-array | stultus library</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">stultus library</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">愚者图书馆</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://duskcloudxu.github.io/2019/11/24/leetcodeLeet-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="duskcloudxu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stultus library">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcodeList-array</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-24T21:56:45-08:00">
+                2019-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/24/leetcodeLeet-array/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/24/leetcodeLeet-array/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>27</td>
+<td><a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="noopener">Remove Element</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/" target="_blank" rel="noopener">Remove Duplicates from Sorted Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>80</td>
+<td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/" target="_blank" rel="noopener">Remove Duplicates from Sorted Array II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>277</td>
+<td><a href="https://leetcode.com/problems/find-the-celebrity/description/" target="_blank" rel="noopener">Find the Celebrity</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Prime</td>
+<td></td>
+</tr>
+<tr>
+<td>189</td>
+<td><a href="https://leetcode.com/problems/rotate-array/description/" target="_blank" rel="noopener">Rotate Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>41</td>
+<td><a href="https://leetcode.com/problems/first-missing-positive/description/" target="_blank" rel="noopener">First Missing Positive</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>299</td>
+<td><a href="https://leetcode.com/problems/bulls-and-cows/" target="_blank" rel="noopener">Bulls and Cows</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>DONE</td>
+<td></td>
+</tr>
+<tr>
+<td>134</td>
+<td><a href="https://leetcode.com/problems/gas-station/description/" target="_blank" rel="noopener">Gas Station</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>118</td>
+<td><a href="https://leetcode.com/problems/pascals-triangle/description/" target="_blank" rel="noopener">Pascal’s Triangle</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>119</td>
+<td><a href="https://leetcode.com/problems/pascals-triangle-ii/description/" target="_blank" rel="noopener">Pascal’s Triangle II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>169</td>
+<td><a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">Majority Element</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>229</td>
+<td><a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">Majority Element II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>274</td>
+<td><a href="https://leetcode.com/problems/h-index/description/" target="_blank" rel="noopener">H-Index</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>275</td>
+<td><a href="https://leetcode.com/problems/h-index-ii/description/" target="_blank" rel="noopener">H-Index II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>243</td>
+<td><a href="https://leetcode.com/problems/shortest-word-distance/description/" target="_blank" rel="noopener">Shortest Word Distance</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>244</td>
+<td><a href="https://leetcode.com/problems/shortest-word-distance-ii/description/" target="_blank" rel="noopener">Shortest Word Distance II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>245</td>
+<td><a href="https://leetcode.com/problems/shortest-word-distance-iii/description/" target="_blank" rel="noopener">Shortest Word Distance III</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>217</td>
+<td><a href="https://leetcode.com/problems/contains-duplicate/description/" target="_blank" rel="noopener">Contains Duplicate</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>219</td>
+<td><a href="https://leetcode.com/problems/contains-duplicate-ii/description/" target="_blank" rel="noopener">Contains Duplicate II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>220</td>
+<td><a href="https://leetcode.com/problems/contains-duplicate-iii/description/" target="_blank" rel="noopener">Contains Duplicate III</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>55</td>
+<td><a href="https://leetcode.com/problems/jump-game/description/" target="_blank" rel="noopener">Jump Game</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>45</td>
+<td><a href="https://leetcode.com/problems/jump-game-ii/description/" target="_blank" rel="noopener">Jump Game II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>121</td>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>122</td>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>123</td>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock III</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>188</td>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock IV</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>309</td>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock with Cooldown</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://leetcode.com/problems/container-with-most-water/description/" target="_blank" rel="noopener">Container With Most Water</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>42</td>
+<td><a href="https://leetcode.com/problems/trapping-rain-water/description/" target="_blank" rel="noopener">Trapping Rain Water</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>334</td>
+<td><a href="https://leetcode.com/problems/increasing-triplet-subsequence/description/" target="_blank" rel="noopener">Increasing Triplet Subsequence</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>128</td>
+<td><a href="https://leetcode.com/problems/longest-consecutive-sequence/description/" target="_blank" rel="noopener">Longest Consecutive Sequence</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>164</td>
+<td><a href="https://leetcode.com/problems/maximum-gap/description/" target="_blank" rel="noopener">Maximum Gap</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>radix Sort</td>
+<td></td>
+</tr>
+<tr>
+<td>287</td>
+<td><a href="https://leetcode.com/problems/find-the-duplicate-number/description/" target="_blank" rel="noopener">Find the Duplicate Number</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>Done</td>
+<td></td>
+</tr>
+<tr>
+<td>135</td>
+<td><a href="https://leetcode.com/problems/candy/description/" target="_blank" rel="noopener">Candy</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>330</td>
+<td><a href="https://leetcode.com/problems/patching-array/description/" target="_blank" rel="noopener">Patching Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>提高</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/" target="_blank" rel="noopener">Median of Two Sorted Arrays</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>321</td>
+<td><a href="https://leetcode.com/problems/create-maximum-number/description/" target="_blank" rel="noopener">Create Maximum Number</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>很少考</td>
+<td></td>
+</tr>
+<tr>
+<td>327</td>
+<td><a href="https://leetcode.com/problems/count-of-range-sum/description/" target="_blank" rel="noopener">Count of Range Sum</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>289</td>
+<td><a href="https://leetcode.com/problems/game-of-life/description/" target="_blank" rel="noopener">Game of Life</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Interval</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>57</td>
+<td><a href="https://leetcode.com/problems/insert-interval/description/" target="_blank" rel="noopener">Insert Interval</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>56</td>
+<td><a href="https://leetcode.com/problems/merge-intervals/description/" target="_blank" rel="noopener">Merge Intervals</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>252</td>
+<td><a href="https://leetcode.com/problems/meeting-rooms/description/" target="_blank" rel="noopener">Meeting Rooms</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>253</td>
+<td><a href="https://leetcode.com/problems/meeting-rooms-ii/description/" target="_blank" rel="noopener">Meeting Rooms II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>352</td>
+<td><a href="https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/" target="_blank" rel="noopener">Data Stream as Disjoint Intervals</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td>TreeMap</td>
+<td></td>
+</tr>
+<tr>
+<td>Counter</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>239</td>
+<td><a href="https://leetcode.com/problems/sliding-window-maximum/description/" target="_blank" rel="noopener">Sliding Window Maximum</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>295</td>
+<td><a href="https://leetcode.com/problems/find-median-from-data-stream/description/" target="_blank" rel="noopener">Find Median from Data Stream</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>53</td>
+<td><a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank" rel="noopener">Maximum Subarray</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>325</td>
+<td><a href="https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/" target="_blank" rel="noopener">Maximum Size Subarray Sum Equals k</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>209</td>
+<td><a href="https://leetcode.com/problems/minimum-size-subarray-sum/description/" target="_blank" rel="noopener">Minimum Size Subarray Sum</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>238</td>
+<td><a href="https://leetcode.com/problems/product-of-array-except-self/description/" target="_blank" rel="noopener">Product of Array Except Self</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>152</td>
+<td><a href="https://leetcode.com/problems/maximum-product-subarray/description/" target="_blank" rel="noopener">Maximum Product Subarray</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>228</td>
+<td><a href="https://leetcode.com/problems/summary-ranges/description/" target="_blank" rel="noopener">Summary Ranges</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>163</td>
+<td><a href="https://leetcode.com/problems/missing-ranges/description/" target="_blank" rel="noopener">Missing Ranges</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Counter</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>88</td>
+<td><a href="https://leetcode.com/problems/merge-sorted-array/description/" target="_blank" rel="noopener">Merge Sorted Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>75</td>
+<td><a href="https://leetcode.com/problems/sort-colors/description/" target="_blank" rel="noopener">Sort Colors</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>283</td>
+<td><a href="https://leetcode.com/problems/move-zeroes/description/" target="_blank" rel="noopener">Move Zeroes</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>376</td>
+<td><a href="https://leetcode.com/problems/wiggle-subsequence/description/" target="_blank" rel="noopener">Wiggle Subsequence</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>280</td>
+<td><a href="https://leetcode.com/problems/wiggle-sort/description/" target="_blank" rel="noopener">Wiggle Sort</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>324</td>
+<td><a href="https://leetcode.com/problems/wiggle-sort-ii/description/" target="_blank" rel="noopener">Wiggle Sort II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>278</td>
+<td><a href="https://leetcode.com/problems/first-bad-version/description/" target="_blank" rel="noopener">First Bad Version</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>35</td>
+<td><a href="https://leetcode.com/problems/search-insert-position/description/" target="_blank" rel="noopener">Search Insert Position</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>33</td>
+<td><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/description/" target="_blank" rel="noopener">Search in Rotated Sorted Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>81</td>
+<td><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/" target="_blank" rel="noopener">Search in Rotated Sorted Array II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>153</td>
+<td><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/" target="_blank" rel="noopener">Find Minimum in Rotated Sorted Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>154</td>
+<td><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/" target="_blank" rel="noopener">Find Minimum in Rotated Sorted Array II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>162</td>
+<td><a href="https://leetcode.com/problems/find-peak-element/description/" target="_blank" rel="noopener">Find Peak Element</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>374</td>
+<td><a href="https://leetcode.com/problems/guess-number-higher-or-lower/" target="_blank" rel="noopener">Guess Number Higher or Lower</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>34</td>
+<td><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/" target="_blank" rel="noopener">Find First and Last Position of Element in Sorted Array</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>349</td>
+<td><a href="https://leetcode.com/problems/intersection-of-two-arrays/description/" target="_blank" rel="noopener">Intersection of Two Arrays</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>350</td>
+<td><a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/description/" target="_blank" rel="noopener">Intersection of Two Arrays II</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>315</td>
+<td><a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/" target="_blank" rel="noopener">Count of Smaller Numbers After Self</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>300</td>
+<td><a href="https://leetcode.com/problems/longest-increasing-subsequence/description/" target="_blank" rel="noopener">Longest Increasing Subsequence</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>354</td>
+<td><a href="https://leetcode.com/problems/russian-doll-envelopes/description/" target="_blank" rel="noopener">Russian Doll Envelopes</a></td>
+<td><a href="https://cspiration.com/login" target="_blank" rel="noopener">视频讲解</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="explanations-and-reflection"><a href="#explanations-and-reflection" class="headerlink" title="explanations and reflection"></a>explanations and reflection</h1><h2 id="274-275-H-Index"><a href="#274-275-H-Index" class="headerlink" title="274 ,275 H-Index"></a>274 ,275 H-Index</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><ol>
+<li>H-Index</li>
+</ol>
+<p>Medium</p>
+<p>484810FavoriteShare</p>
+<p>Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher’s h-index.</p>
+<p>According to the <a href="https://en.wikipedia.org/wiki/H-index" target="_blank" rel="noopener">definition of h-index on Wikipedia</a>: “A scientist has index <em>h</em> if <em>h</em> of his/her <em>N</em> papers have <strong>at least</strong> <em>h</em> citations each, and the other <em>N − h</em> papers have <strong>no more than</strong> <em>h</em> citations each.”</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: citations = [3,0,6,1,5]</span><br><span class="line">Output: 3 </span><br><span class="line">Explanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of them had </span><br><span class="line">             received 3, 0, 6, 1, 5 citations respectively. </span><br><span class="line">             Since the researcher has 3 papers with at least 3 citations each and the remaining </span><br><span class="line">             two with no more than 3 citations each, her h-index is 3.</span><br></pre></td></tr></table></figure>
+<p><strong>Note:</strong> If there are several possible values for <em>h</em>, the maximum one is taken as the h-index.</p>
+<h3 id="Explanations"><a href="#Explanations" class="headerlink" title="Explanations"></a>Explanations</h3><p>That is an interesting question, and the main challenge is to understand the new conception brought in description: <code>The H-index</code>.</p>
+<p>It says that, Given an array of citation numbers <code>citi</code>,  an h-index is an number <code>h</code> that within the interval <code>[0,citi.length]</code> so that there are <code>h</code> paper has citations <code>c</code> &gt;= <code>h</code>, and remaining papers has <code>c</code>&lt;=<code>h</code>.  </p>
+<h4 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h4><p>First of all, this definition is way too complicated, let’s find a way to simplify it. </p>
+<p>The beginning of problem analysis is always find a certifier. Given an number h,  We examine it by iterates the whole array, and count the number of paper that has citations less or equal to <code>h</code>, namely $Num<em>{under}$, and number$Num</em>{upper}$ for papers that has citations above or equal to <code>h</code>. if $Num_{upper}$==<code>h</code>, then it is an valid <code>H-index</code>.</p>
+<p>Emmm, I see, it is an NP problem! (LOL)</p>
+<p>Okay, to be serious, now we knows how to examine the answer, and let’s talk about more different situations. For example, we could easily know that if $Num<em>{upper}$ is smaller then <code>h</code>, the <code>h</code> must be bigger than any <code>H-index</code>. But what if we find $Num</em>{upper}$ is bigger then h? Is there any way to find the right <code>H-index</code>?</p>
+<p>The most naïve method is to increase <code>h</code> by one, and iterate the whole array to check if $Number<em>{upper}$ decreased. If it really decreased, and currently get <code>h</code>=$Num</em>{upper}$ , okay we get the right <code>H-index</code>. if $Num<em>{upper}$ is still the same or it decreased but still bigger than <code>h</code> , we continuously decrease <code>h</code>, since <code>h</code> increases and $Num</em>{upper}$ decreases, they would become equal eventually. </p>
+<p>Do we really need to iterate the whole array in each increase? meh…let’s reconsider our model: Set $S<em>{upper}$ for papers with citations &gt;= <code>h</code>, and set $S</em>{under}$for papers with citations &lt;=<code>h</code>, initial h=0, so $|S_{upper}|=|citi|$ , now we have a set $Gree$. As the name, we put the paper with maximum citation among the remaining papers with citations &gt;=<code>h</code> into $Gree$ each time <code>h</code> increases, and when there is no such paper, we say the <code>h</code> is the max <code>h-index</code>. Since each time we select the paper with max citation, we just need to sort the array in descending order and iterator over it. </p>
+<h4 id="Follow-Up"><a href="#Follow-Up" class="headerlink" title="Follow Up"></a>Follow Up</h4><p>275 says that if give you an ordered array……okay, then go for binary search, apparently.</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hIndex</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; citations)</span> </span>&#123;</span><br><span class="line">        sort(citations.begin(),citations.end(),[](<span class="keyword">auto</span> a,<span class="keyword">auto</span> b)&#123;<span class="keyword">return</span> a&gt;b;&#125;);</span><br><span class="line">        <span class="keyword">int</span> h=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;citations.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(citations[i]&gt;=h+<span class="number">1</span>)h++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> h;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="45-jump-game-II"><a href="#45-jump-game-II" class="headerlink" title="45 jump game II"></a>45 jump game II</h2><blockquote>
+<p>That is why I do not like leetcode hard, normally there would only be one way out, and it’s only depends on whether you have an “a-ha” moment or not.</p>
+</blockquote>
+<p>Hard</p>
+<p>169994FavoriteShare</p>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Your goal is to reach the last index in the minimum number of jumps.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [2,3,1,1,4]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The minimum number of jumps to reach the last index is 2.</span><br><span class="line">    Jump 1 step from index 0 to 1, then 3 steps to the last index.</span><br></pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<p>You can assume that you can always reach the last index.</p>
+<h3 id="Explanations-1"><a href="#Explanations-1" class="headerlink" title="Explanations"></a>Explanations</h3><p>The basic idea is straightforward, use DP to update the minimum jump number for each sub problem dp[i], and the time complexity upper bound is $O(N^2)$. Yet the data here is too large for an algorithm of this time complexity, and that is where our trick is.</p>
+<p>Firstly, our basic idea is to update the optimal value of each position by the min jump number, e.g. for an array:<code>[2,3,1,1,4]</code>, when we start iterating at the first position, the dp array would be like <code>[0,inf,inf,inf,inf]</code>, and obviously if we start from index 0 to other position we would get this dp array <code>[0,1,1,inf,inf]</code>, and then we process index 1 and the result should be <code>[0,1,1,2,2]</code> and we process index 2 and son on. Note that the dp recurrence formulate is </p>
+<script type="math/tex; mode=display">
+dp[i]=min(dp[i],jumpNumFromCurrentPosition+1)</script><p>In plain English, the optimal value of an index $i$ is the minimum jumps number plus 1 of all the positions could reach to index $i$.</p>
+<p>As you can see, the time complexity of this basic algorithm is $O(N^2)$ since in the worst case, each position would reach to all the following position, and that would be $N, N-1,N-2,…,1$ calculations, and that is $O(N^2)$.</p>
+<p>And our goal is to optimize this update mechanism. In the update step, we update the following dp[i] linearly, and that is what we want to optimize. The most brute-force way is to use an segment tree, which could make range update in $O(logn)$.  So the final time complexity of this problem would be $O(nlogn)$, and it would be painful to write a segment tree by yourself in an interview without a template.</p>
+<p>Other solutions, which only works for this problem, is to make an “lazy update”. we maintain an interval where the minimum jump number in the interval is equal or below an certain number $C$. We continuously put new element into that interval and update $C$ lazily, and immediately stop when the last position is included into the interval.</p>
+<h2 id="11-Container-With-Most-Water"><a href="#11-Container-With-Most-Water" class="headerlink" title="11. Container With Most Water"></a>11. Container With Most Water</h2><p>Medium</p>
+<p>4434496FavoriteShare</p>
+<p>Given <em>n</em> non-negative integers <em>a1</em>, <em>a2</em>, …, <em>an</em> , where each represents a point at coordinate (<em>i</em>, <em>ai</em>). <em>n</em> vertical lines are drawn such that the two endpoints of line <em>i</em> is at (<em>i</em>, <em>ai</em>) and (<em>i</em>, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+<p><strong>Note:</strong> You may not slant the container and <em>n</em> is at least 2.</p>
+<p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg" alt="img"></p>
+<p>The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,8,6,2,5,4,8,3,7]</span><br><span class="line">Output: 49</span><br></pre></td></tr></table></figure>
+<h3 id="Explanations-2"><a href="#Explanations-2" class="headerlink" title="Explanations"></a>Explanations</h3><p>TBH, I am quite confused at the beginning since I just dig deep in DP and Greedy, and only found that those do not work. After checked the optimal solutions for this problem, I found that I am not good at two pointers and decide to design a kind of analysis pattern for two pointer problem.</p>
+<p>First of all, I claim that, the essence of two pointer method is to eliminate candidate optimal solutions in the solution space. In other word, you prove that your solution is better than some other solutions in the solution space, so you could save time of checking whether they are optimal solution or not, for you have checked a better solution( which is, the current solution.)</p>
+<p>Secondly, there are two kinds of two pointers method, the first is to set both the head and rear pointers at the first element in the array(or the last, basically the same), and another is to set the head pointer at the first element and the rear pointer at the last element and “shrink” the interval formed by the head pointer and the rear pointer.</p>
+<p>Therefore, maybe we could just try both two method and see whether we could find a way to eliminate the candidate solution. In other words, try to prove that the current solution is better than some other unchecked solutions in the solution space.</p>
+<h2 id="334-Increasing-Triplet-Subsequence"><a href="#334-Increasing-Triplet-Subsequence" class="headerlink" title="334 Increasing Triplet Subsequence"></a>334 Increasing Triplet Subsequence</h2><p>Medium</p>
+<p>Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.</p>
+<p>Formally the function should:</p>
+<blockquote>
+<p>Return true if there exists <em>i, j, k</em><br>such that <em>arr[i]</em> &lt; <em>arr[j]</em> &lt; <em>arr[k]</em> given 0 ≤ <em>i</em> &lt; <em>j</em> &lt; <em>k</em> ≤ <em>n</em>-1 else return false.</p>
+</blockquote>
+<p><strong>Note:</strong> Your algorithm should run in O(<em>n</em>) time complexity and O(<em>1</em>) space complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,2,3,4,5]</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [5,4,3,2,1]</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+<h3 id="explanations"><a href="#explanations" class="headerlink" title="explanations"></a>explanations</h3><p>it’s very intuitive to come up with a brute force algorithm where you record the number of previous smaller element for each element in the array, like <code>[1,2,3,4,5]</code>=&gt;<code>[0,1,2,3,4]</code>. Based on that, we notice that we only care about there is such 3 elements i,j,k that <em>arr[i]</em> &lt; <em>arr[j]</em> &lt; <em>arr[k]</em> given i&lt;j&lt;k. In other words, we care about whether there is a element that has a previous smaller element that has a previous smaller element. </p>
+<p>Back to the brute force algorithm, and we name the mapped array <code>[0,1,2,3,4]</code> as <code>previousSmallerArray</code>(<code>PSA</code> as abbreviation ). We observe it, and we guess, if there is an element bigger than 2 in <code>PSA</code>, then we could found the subsequence we want. However, it is not guaranteed for the counter example <code>[2,1,3]</code>=&gt;<code>[0,0,2]</code> and there is not a valid subsequence for this question.</p>
+<p>Ok, now we found that the most obvious idea is wrong, then what should we do next? Aare we in the totally wrong direction? Maybe we just need some small modification. Look back at the definition, we could see that the middle index, j, is the critical point: it takes the role linking i and k, and what is the cost of finding all the j? Well, it should take $O(n^2)$ to find a valid pair of $i,j$, but it would cost linear time to find if an index could be a $j$: Start iterating from beginning and use a variable $Min$ to record the current minimum number. In each iteration, try to compare variable $Min$ and current value, if the element is bigger than the $Min$, the index of this element should be a candidate $j$.</p>
+<p>So this is an interesting part of algorithm, finding an exact pair and finding the existence of a pair is quit different, and the latter could be done in linear time.</p>
+<p>Things become clear now, and we just use the same strategy to iterator the array again, but at this time, we aim for $k$, and a valid $k$ should has a prior $j$ that $arr[j]&lt;arr[k]$, and it could also be completed in linear time by recording a minimum $arr[j]$.</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">increasingTriplet</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.size()&lt;<span class="number">3</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;smallerNum(nums.size(),<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> minn=nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;minn)&#123;</span><br><span class="line">                smallerNum[i]++;</span><br><span class="line">            &#125;</span><br><span class="line">            minn=min(minn,nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> secondSmall=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(smallerNum[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                secondSmall=i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(secondSmall==<span class="number">-1</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=secondSmall+<span class="number">1</span>;i&lt;nums.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;nums[secondSmall])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[secondSmall]&gt;nums[i]&amp;&amp;smallerNum[i]&gt;<span class="number">0</span>)secondSmall=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="128-Longest-Consecutive-Sequence"><a href="#128-Longest-Consecutive-Sequence" class="headerlink" title="128  Longest Consecutive Sequence"></a>128  <a href="https://leetcode.com/problems/longest-consecutive-sequence/description/" target="_blank" rel="noopener">Longest Consecutive Sequence</a></h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/刷题/" rel="tag"># 刷题</a>
+          
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/22/max-queue-implementation/" rel="next" title="max queue implementation">
+                <i class="fa fa-chevron-left"></i> max queue implementation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/24/leetcode-41-First-Missing-Positive/" rel="prev" title="leetcode 41 First Missing Positive">
+                leetcode 41 First Missing Positive <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="duskcloudxu">
+            
+              <p class="site-author-name" itemprop="name">duskcloudxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/duskcloudxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cmbjx1@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <div></div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#List"><span class="nav-number">1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#explanations-and-reflection"><span class="nav-number">2.</span> <span class="nav-text">explanations and reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#274-275-H-Index"><span class="nav-number">2.1.</span> <span class="nav-text">274 ,275 H-Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">2.1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explanations"><span class="nav-number">2.1.2.</span> <span class="nav-text">Explanations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Follow-Up"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Follow Up</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">2.1.3.</span> <span class="nav-text">code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-jump-game-II"><span class="nav-number">2.2.</span> <span class="nav-text">45 jump game II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explanations-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Explanations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Container-With-Most-Water"><span class="nav-number">2.3.</span> <span class="nav-text">11. Container With Most Water</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explanations-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">Explanations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#334-Increasing-Triplet-Subsequence"><span class="nav-number">2.4.</span> <span class="nav-text">334 Increasing Triplet Subsequence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#explanations"><span class="nav-number">2.4.1.</span> <span class="nav-text">explanations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.4.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#128-Longest-Consecutive-Sequence"><span class="nav-number">2.5.</span> <span class="nav-text">128  Longest Consecutive Sequence</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duskcloudxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://stultuslibrary.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://duskcloudxu.github.io/2019/11/24/leetcodeLeet-array/';
+          this.page.identifier = '2019/11/24/leetcodeLeet-array/';
+          this.page.title = 'leetcodeList-array';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://stultuslibrary.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"]  ], processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

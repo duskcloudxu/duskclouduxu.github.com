@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数学,神经网络,224n,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前在上stanford的224n，原理搞懂了，但是代码还是磕磕绊绊，我认为主要原因是里面的文档写的太过于无厘头了，导致我看不懂他想干嘛，和我的思路不一样！（深信不疑）（明明是你菜） 下面是对应的problemSet里面数学推导的过程，我觉得除了数学专业的以外，每个人入门神经网络的时候都被梯度下降，目标函数相关的数学原理坑到过，其最大的坑应该在于：这个变量，他是一个标量，还是一个向量？是一个常数，">
+<meta name="keywords" content="数学,神经网络,224n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神经网络的数学推导">
+<meta property="og:url" content="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/index.html">
+<meta property="og:site_name" content="stultus library">
+<meta property="og:description" content="之前在上stanford的224n，原理搞懂了，但是代码还是磕磕绊绊，我认为主要原因是里面的文档写的太过于无厘头了，导致我看不懂他想干嘛，和我的思路不一样！（深信不疑）（明明是你菜） 下面是对应的problemSet里面数学推导的过程，我觉得除了数学专业的以外，每个人入门神经网络的时候都被梯度下降，目标函数相关的数学原理坑到过，其最大的坑应该在于：这个变量，他是一个标量，还是一个向量？是一个常数，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/neuralNetwork-1526358706335.png">
+<meta property="og:image" content="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/neuralNetwork-1526358706335.png">
+<meta property="og:updated_time" content="2020-01-29T09:48:29.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神经网络的数学推导">
+<meta name="twitter:description" content="之前在上stanford的224n，原理搞懂了，但是代码还是磕磕绊绊，我认为主要原因是里面的文档写的太过于无厘头了，导致我看不懂他想干嘛，和我的思路不一样！（深信不疑）（明明是你菜） 下面是对应的problemSet里面数学推导的过程，我觉得除了数学专业的以外，每个人入门神经网络的时候都被梯度下降，目标函数相关的数学原理坑到过，其最大的坑应该在于：这个变量，他是一个标量，还是一个向量？是一个常数，">
+<meta name="twitter:image" content="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/neuralNetwork-1526358706335.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/">
+
+
+
+<meta name="google-site-verification" content="_bl10zsYCdhg6gfYlPYwQEJjbwHSQIrDlQlACLW0c3Y">
+
+  <title>神经网络的数学推导 | stultus library</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">stultus library</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">愚者图书馆</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="duskcloudxu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stultus library">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">神经网络的数学推导</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T17:24:35-07:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/13/神经网络的数学推导/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/13/神经网络的数学推导/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前在上stanford的224n，原理搞懂了，但是代码还是磕磕绊绊，我认为主要原因是里面的文档写的太过于无厘头了，导致我看不懂他想干嘛，和我的思路不一样！（深信不疑）（明明是你菜）</p>
+<p>下面是对应的problemSet里面数学推导的过程，我觉得除了数学专业的以外，每个人入门神经网络的时候都被梯度下降，目标函数相关的数学原理坑到过，其最大的坑应该在于：这个变量，他是一个标量，还是一个向量？是一个常数，还是一个矩阵？希望同样是学渣的在下能帮同样是数学学渣的读者们理清一些思路，权当是抛砖引玉了。</p>
+<p>当然由于在下是数学学渣，所以难免会有理解错误的地方，非常欢迎讨论和指正。</p>
+<blockquote>
+<p>由于是边推导边写的文档，可能存在一点不方便阅读的地方，如果你看到这个的话说明还在编辑修改中。</p>
+</blockquote>
+<h2 id="problem-1"><a href="#problem-1" class="headerlink" title="problem 1"></a>problem 1</h2><h3 id="softmax的特殊规则推导"><a href="#softmax的特殊规则推导" class="headerlink" title="softmax的特殊规则推导"></a>softmax的特殊规则推导</h3><p><em>试证：</em></p>
+<script type="math/tex; mode=display">
+softmax(x)=softmax(x+c)</script><hr>
+<p>softmax函数定义为：</p>
+<script type="math/tex; mode=display">
+softmax(x_i)=\frac{e^{x_i}}{\sum_j^n e^{x_j}}</script><p>根据有关规定(鬼才知道哪里规定了一个对于一个函数输入是一个矩阵则输出必须是一个矩阵)</p>
+<p>$x=[1,2]^T$  这样的一个矩阵，求 $softmax(x)$ ,其结果是：</p>
+<script type="math/tex; mode=display">
+softmax(x)=[\frac{e^1}{e^1+e^2},\frac{e^2}{e^1+e^2}]^T</script><p>那么说说之前的证明，其实很好证：</p>
+<script type="math/tex; mode=display">
+softmax(x+c)
+=
+\frac{e^{x_i+c}}{\sum_j^n e^{x_j+c}}
+=
+\frac{e^ce^{x_i}}{e^c\sum_j^n e^{x_j}}=\frac{e^{x_i}}{\sum_j^n e^{x_j}}=softmax(x)</script><p>因为证明了 $softmax(x)=softmax(x+c)$，所以说我们可以用在算$softmax(x)$的时候用设$c=max(x)$(即矩阵中最大的一个元素)，得到以下式子：</p>
+<script type="math/tex; mode=display">
+softmax(x-max(x))</script><p>来提高计算稳定性。</p>
+<p>至于为什么能提高，可以自己想一想。(下面是答案）</p>
+<font color="#ffffff">防止$e^x$中x过大导致数值溢出</font>
+
+<h1 id="反向传播推导"><a href="#反向传播推导" class="headerlink" title="反向传播推导"></a>反向传播推导</h1><h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p><img src="neuralNetwork-1526358706335.png" alt></p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>这是一个比较简单的多分类神经网络，其输入是 $I_{n\times 1}$ ，假设激活函数为 </p>
+<script type="math/tex; mode=display">
+sig(x)=\frac{1}{1+e^{-x}}</script><p> ,输出以后通过</p>
+<script type="math/tex; mode=display">
+softmax(x_j)=\frac{e^{x_j}}{\sum^{o}_{i=1}e^{x_i}}</script><p>得到向量$\hat{Y}_{o\times 1}$ </p>
+<p>将$\hat{Y}_{o\times 1}$通过交叉熵公式得出结果</p>
+<p>设label为 $Y_{o\times 1}$ 且其为one-hot key,则交叉熵公式为：</p>
+<script type="math/tex; mode=display">
+CE(Y_{o\times 1}，\hat{Y}_{o\times 1})=-\sum^{o}_{i=1}Y_ilog(\hat{Y}_i)</script><h3 id="例子：求导-W2"><a href="#例子：求导-W2" class="headerlink" title="例子：求导 $W2$"></a>例子：求导 $W2$</h3><p>对一个前向传播求出的</p>
+<script type="math/tex; mode=display">CE(Y_{o\times 1}，\hat{Y}_{o\times 1})</script><p>求关于$W2$：</p>
+<script type="math/tex; mode=display">
+W2=\left[ \begin{matrix} w_{11} & w_{12} \\ w_{21} & w_{22}\end{matrix}\right]</script><script type="math/tex; mode=display">
+B2=\left[  \begin{matrix} b_{1}  \\ b_{2} \end{matrix}\right]</script><blockquote>
+<p>注，B矩阵是每个神经元的bias，没有在图中表示，想要了解可自行百度<em>(:з)∠)</em></p>
+</blockquote>
+<script type="math/tex; mode=display">
+H=\left[  \begin{matrix} h_{1}  \\ h_{2} \end{matrix}\right]</script><script type="math/tex; mode=display">
+O=W2H+B2=\left[  \begin{matrix} o_{1}  \\ o_{2} \end{matrix}\right]=\left[  \begin{matrix}  w_{11}h_{1}+ w_{12}\times h_{2}+b_{1}  \\ w_{21}h_{1}+ w_{22}\times h_{2}+b_{2}  \end{matrix}\right]</script><script type="math/tex; mode=display">
+S=softmax(O)=>S(o_i)=\frac{e^{o_j}}{\sum^{o}_{i=1}e^{o_i}}</script><script type="math/tex; mode=display">
+CE(Y_{o\times 1}，\hat{Y}_{o\times 1})=-\sum^{o}_{i=1}Y_ilog(\hat{Y}_i)</script><p>$w_{11}$的偏导则为：</p>
+<script type="math/tex; mode=display">\frac{\partial{CE}}{\partial{w_{11}}}</script><blockquote>
+<p>注意下这边不能直接用链式法则展开，不然遇到中间求矩阵导的情况就彻底GG了。以下为推导：</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\frac{\partial{CE}}{\partial{w_{11}}} &= -\sum^{o}_{i=1}\frac{\partial{}Y_ilog(\hat{Y}_i)}{\partial{w_{11}}}
+\\
+&=-\sum^{o}_{i=1}\frac{Y_i\partial{}log(\hat{Y}_i)}{\partial{w_{11}}}
+\\
+&=-\sum^{o}_{i=1}\frac{Y_i\partial{\hat{Y}_i}}{\hat{Y}_i\partial{w_{11}}}
+\end{aligned}
+\end{equation}</script><p>接下来对于 </p>
+<script type="math/tex; mode=display">\sum^{o}_{i=1}\frac{\partial{\hat{Y}_i}}{\partial{w_{11}}}</script><p>进行求导，即求：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\sum^{o}_{i=1}\frac{\partial{\frac{e^{o_i}}{\sum^{o}_{j=1}e^{o_j}}}}{\partial{w_{11}}}
+\end{aligned}
+\end{equation}</script><p>那么这么需要一个变形，即：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\sum^{o}_{i=1}\frac{\partial{\frac{e^{o_i}}{\sum^{o}_{j=1}e^{o_j}}}}{\partial{o_{1}}}\frac{\partial{o_{1}}}{\partial{w_{11}}}
+=
+h_{11}
+\sum^{o}_{i=1}
+\frac{
+    \partial{}
+    \frac{
+            e^{o_i}
+        }            
+        {
+            \sum^{o}_{j=1}e^{o_j}
+        }    
+    }
+    {\partial{o_{1}}}
+
+\end{aligned}
+\end{equation}</script><p>而关于softmax的偏导如下，对于</p>
+<script type="math/tex; mode=display">softmax(o_i)=\frac{e^{o_i}}{\sum^{n}_{k=1}e^{o_k}}</script><blockquote>
+<p>这里将$\sum^{o}_{j=1}$的o改成了n,j改成k来避免混淆。</p>
+</blockquote>
+<p>做关于$o_j$的推导</p>
+<p>即求</p>
+<script type="math/tex; mode=display">\frac{\partial{\frac{e^{o_i}}{\sum^{n}_{k=1}e^{o_k}}}}{\partial{o_j}}</script><p>,为了方便起见，约定</p>
+<script type="math/tex; mode=display">\sum^{n}_{k=1}e^{o_k}=\sum</script><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+    \frac{\partial{\frac{e^{o_i}}{\sum}}}{\partial{o_j}}
+    &=
+    \frac
+    {
+      \sum
+      \frac{\partial{e^{o_i}}}
+              {\partial{o_j}}
+      -
+      \frac{\partial{\sum}}
+              {\partial{o_j}}
+      e^{o_i}
+    }
+    {\sum^2}
+\end{aligned}
+\end{equation}</script><p>此时若$j=i$，则：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+      \frac{\partial{\frac{e^{o_i}}{\sum}}}{\partial{o_j}}=\frac{\partial{\frac{e^{o_i}}{\sum}}}{\partial{o_i}}
+    &=
+    \frac
+    {
+        \sum
+        \frac{\partial{e^{o_i}}}
+                {\partial{o_i}}
+        -
+        \frac{\partial{\sum}}
+                {\partial{o_i}}
+        e^{o_i}
+    }
+    {\sum^2}
+    \\&=
+   \frac
+   {
+        \sum
+        ·
+        e^{o_i}
+        -
+        e^{2o_i}
+    }
+   {\sum^2}
+   \\&=
+   \frac
+   {
+        e^{o_i}
+    }
+    {\sum}
+    \frac
+   {    (
+        \sum
+        -
+        e^{o_i}
+        )
+    }
+    {\sum}
+    \\&=
+    softmax(o_i)
+   \times 
+   (1-softmax(o_i))
+    \\&=
+    softmax(o_i)
+    -
+    softmax(o_i)
+    \times 
+    softmax(o_j)
+\end{aligned}
+\end{equation}</script><blockquote>
+<p>最后一步的转化是为了方便统一格式</p>
+</blockquote>
+<p>若$j\neq{i}$,则：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+    \frac{\partial{\frac{e^{o_i}}{\sum}}}{\partial{o_j}}
+    &=
+    \frac
+    {
+        \sum
+        \frac{\partial{e^{o_i}}}
+                {\partial{o_j}}
+        -
+        \frac{\partial{\sum}}
+                {\partial{o_j}}
+        e^{o_i}
+    }
+    {\sum^2}
+    \\&=
+   \frac
+   {
+        -
+        e^{o_j}
+        e^{o_i}
+    }
+   {\sum^2}
+    \\&=
+    -
+    softmax(o_i)
+    \times 
+    softmax(o_j)
+\end{aligned}
+\end{equation}</script><p>那么进行总结</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+ \frac{\partial{\frac{e^{o_i}}{\sum}}}{\partial{o_j}}=
+     \begin{cases}
+    s(o_i)
+    -
+    s(o_i)\times s(o_j)
+    \quad j=i 
+    \\
+    -s(o_i)\times s(o_j)
+    \quad j\neq i
+    \end{cases}
+    \tag{1}
+\end{equation}</script><p>刚才的问题是求</p>
+<script type="math/tex; mode=display">
+-
+\sum^{o}_{i=1}
+\frac{
+    Y_i
+    \partial{}
+    \frac{
+            e^{o_i}
+        }
+            {
+            \sum
+        }
+    }
+    {
+        s(o_i)\partial{o_{1}}
+    }</script><blockquote>
+<p>根据之前的约定</p>
+</blockquote>
+<script type="math/tex; mode=display">\hat{Y_i}=s(o_i)</script><p>那么，带入$(1)$求其通解即是：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+-\sum^{o}_{i=1}
+\frac{Y_i}{s(o_i)}
+\frac{
+    \partial{}
+    \frac{
+            e^{o_i}
+        }
+             {
+            \sum
+        }
+    }
+    {
+        \partial{o_{j}}
+    }
+&=
+-
+\frac{Y_i}{s(o_j)}
+s(o_j)
++
+\sum^{o}_{i=1}{
+    \frac{Y_i}{s(o_i)}
+    s(o_i)\times s(o_j)
+}
+\\
+&=
+-
+{Y_j}
++
+\sum^{o}_{i=1}{
+    {Y_i}\times s(o_j)
+}
+
+\end{aligned}
+\end{equation}</script><blockquote>
+<p>这里有些跳步，觉得疑惑的读者可以用纸笔带入（1）算一下……</p>
+</blockquote>
+<p>那么，在这个多分类中我们采用one-hot key编码，仔细想一下，就可以发现:假设one-hot key中1在第$num$位，那么如果当所求的数字$j=num$时，得到的结果会是：</p>
+<script type="math/tex; mode=display">
+-
+{Y_j}
++
+\sum^{o}_{i=1}{
+    {Y_i}\times s(o_j)
+}
+=
+-1+s(o_j)</script><p>如果$j\neq{num}$,那么所得的数字就是：</p>
+<script type="math/tex; mode=display">
+-
+{Y_j}
++
+\sum^{o}_{i=1}{
+    {Y_i}\times s(o_j)
+}
+=
+s(o_j)</script><p>那么，总结上述提到的几个公式：</p>
+<script type="math/tex; mode=display">
+\frac{\partial{CE}}{\partial{w_{jk}}}
+=
+-\sum^{o}_{i=1}\frac{Y_i\partial{\hat{Y}_i}}{\hat{Y}_i\partial{w_{jk}}}
+=
+-
+\sum^{o}_{i=1}
+\frac{Y_i}{s(o_i)}
+\frac{\partial{s(o_i)}}{\partial{o_{j}}}
+\frac{\partial{o_{j}}}{\partial{w_{jk}}}
+=
+-
+\sum^{o}_{i=1}
+\frac{Y_i}{s(o_i)}
+\frac{\partial{s(o_i)}}{\partial{o_{j}}}
+h_k</script><p>然后对于$w_{jk}$的最终结果</p>
+<p>如果$j=num$时，我们得到梯度为</p>
+<script type="math/tex; mode=display">(s(o_j)-1)\times h_k$,不然$s(o_j)\times h_k</script><h3 id="例子：求导-W1"><a href="#例子：求导-W1" class="headerlink" title="例子：求导$W1$"></a>例子：求导$W1$</h3><p>因方便阅读之起见，上面的图例再用一次：</p>
+<p><img src="neuralNetwork-1526358706335.png" alt="neuralNetwork"></p>
+<script type="math/tex; mode=display">
+W1=\left[ \begin{matrix} w_{11} & w_{12} \\ w_{21} & w_{22}\end{matrix}\right]</script><script type="math/tex; mode=display">
+B1=\left[  \begin{matrix} b_{1}  \\ b_{2} \end{matrix}\right]</script><script type="math/tex; mode=display">
+I=\left[  \begin{matrix} i_{1}  \\ i_{2} \end{matrix}\right]</script><script type="math/tex; mode=display">
+H=sig(W1I1+B1)
+=
+\left[  
+    \begin{matrix}
+        h_1
+        \\
+        h_2
+    \end{matrix}
+\right]
+=
+\left[  
+    \begin{matrix}
+        sig(\sum^2_{i=1}w_{1i}i_i+b_1)
+        \\
+        sig(\sum^2_{i=1}w_{2i}i_i+b_2) 
+    \end{matrix}
+\right]</script><p>其中，$sig(X)$为：</p>
+<script type="math/tex; mode=display">
+sig(X)=sig(x_{ij})=\frac{1}{1+e^{-x_{ij}}}</script><p>对其求导，则易得：</p>
+<script type="math/tex; mode=display">
+sig‘(x_{ij})=sig(x_{ij})(1-sig(x_{ij}))</script><p>我们的目的是求得</p>
+<script type="math/tex; mode=display">\frac{\partial{CE}}{\partial{}W1_{ij}}</script><p>,那么易得以下公式：</p>
+<blockquote>
+<p>注：这边的$W1_{ij}$从图中可以比较轻松的看出是hidden层第i个神经元的第j条输入的权重。</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\frac{\partial{CE}}{\partial{}W1_{ij}}
+&=
+\frac{\partial{CE}}{\partial{}h_{i}}\frac{\partial{h_i}}{\partial{}W1_{ij}}
+\\
+&=
+\frac{\partial{CE}}{\partial{}h_{i}}
+\frac{\partial{h_i}}{\partial{}(W1_{ij}\times i_j){}}
+\frac{\partial{}(W1_{ij}\times i_j)}{\partial{}W1_{ij}}
+\\
+&=
+\frac{\partial{CE}}{\partial{}h_{i}}
+(h_i(1-h_i))
+i_j
+\end{aligned}
+\end{equation}</script><p>那么对于一个独立的$h_k$</p>
+<script type="math/tex; mode=display">\frac{\partial{CE}}{\partial{}h_{k}}</script><p>的求导为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial{CE}}{\partial{h_k}}
+=
+-\sum^{o}_{i=1}\frac{Y_i\partial{\hat{Y}_i}}{\hat{Y}_i\partial{h_k}}
+=
+-
+\sum^{o}_{i=1}
+\frac{Y_i}{s(o_i)}
+\frac{\partial{s(o_i)}}{\partial{o_{j}}}
+\frac{\partial{o_{j}}}{\partial{h_k}}
+=
+-
+\sum^{o}_{i=1}
+\frac{Y_i}{s(o_i)}
+\frac{\partial{s(o_i)}}{\partial{o_{j}}}
+h_k</script>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/224n/" rel="tag"># 224n</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/14/hexo-renderer-kramed与mathJax的兼容问题及解决方法/" rel="prev" title="hexo-renderer-kramed与mathJax的兼容问题及解决方法">
+                hexo-renderer-kramed与mathJax的兼容问题及解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="duskcloudxu">
+            
+              <p class="site-author-name" itemprop="name">duskcloudxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/duskcloudxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cmbjx1@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <div></div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#problem-1"><span class="nav-number">1.</span> <span class="nav-text">problem 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#softmax的特殊规则推导"><span class="nav-number">1.1.</span> <span class="nav-text">softmax的特殊规则推导</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#反向传播推导"><span class="nav-number"></span> <span class="nav-text">反向传播推导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图例"><span class="nav-number">1.</span> <span class="nav-text">图例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：求导-W2"><span class="nav-number">1.2.</span> <span class="nav-text">例子：求导 $W2$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：求导-W1"><span class="nav-number">1.3.</span> <span class="nav-text">例子：求导$W1$</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duskcloudxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://stultuslibrary.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://duskcloudxu.github.io/2018/07/13/神经网络的数学推导/';
+          this.page.identifier = '2018/07/13/神经网络的数学推导/';
+          this.page.title = '神经网络的数学推导';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://stultuslibrary.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"]  ], processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

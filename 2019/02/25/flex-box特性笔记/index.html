@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="css,前端,flex,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="flex-box 特性笔记flex box对我来说也不是什么新奇的东西了，是大二下的时候学习的知识了。用着用着从显性知识渐渐的沉淀到了隐性知识，所以说对它的一些细节也不大记得清了，所以写下笔记整理一下。  如果能看懂英文文档的话，关于flex-box的讲解这边有一片更加完全的文章  我知道的flex是一种快速方便整理布局的方法，只要一个标签被设为flex，那它所有的子元素也都是flex。但是这个特">
+<meta name="keywords" content="css,前端,flex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex box特性笔记">
+<meta property="og:url" content="http://duskcloudxu.github.io/2019/02/25/flex-box特性笔记/index.html">
+<meta property="og:site_name" content="stultus library">
+<meta property="og:description" content="flex-box 特性笔记flex box对我来说也不是什么新奇的东西了，是大二下的时候学习的知识了。用着用着从显性知识渐渐的沉淀到了隐性知识，所以说对它的一些细节也不大记得清了，所以写下笔记整理一下。  如果能看懂英文文档的话，关于flex-box的讲解这边有一片更加完全的文章  我知道的flex是一种快速方便整理布局的方法，只要一个标签被设为flex，那它所有的子元素也都是flex。但是这个特">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-29T09:48:29.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flex box特性笔记">
+<meta name="twitter:description" content="flex-box 特性笔记flex box对我来说也不是什么新奇的东西了，是大二下的时候学习的知识了。用着用着从显性知识渐渐的沉淀到了隐性知识，所以说对它的一些细节也不大记得清了，所以写下笔记整理一下。  如果能看懂英文文档的话，关于flex-box的讲解这边有一片更加完全的文章  我知道的flex是一种快速方便整理布局的方法，只要一个标签被设为flex，那它所有的子元素也都是flex。但是这个特">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://duskcloudxu.github.io/2019/02/25/flex-box特性笔记/">
+
+
+
+<meta name="google-site-verification" content="_bl10zsYCdhg6gfYlPYwQEJjbwHSQIrDlQlACLW0c3Y">
+
+  <title>flex box特性笔记 | stultus library</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">stultus library</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">愚者图书馆</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://duskcloudxu.github.io/2019/02/25/flex-box特性笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="duskcloudxu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stultus library">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">flex box特性笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-25T13:35:58-08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/25/flex-box特性笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/25/flex-box特性笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="flex-box-特性笔记"><a href="#flex-box-特性笔记" class="headerlink" title="flex-box 特性笔记"></a>flex-box 特性笔记</h1><p>flex box对我来说也不是什么新奇的东西了，是大二下的时候学习的知识了。用着用着从显性知识渐渐的沉淀到了隐性知识，所以说对它的一些细节也不大记得清了，所以写下笔记整理一下。</p>
+<blockquote>
+<p>如果能看懂英文文档的话，关于flex-box的讲解这边有一片更加完全的<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">文章</a></p>
+</blockquote>
+<h2 id="我知道的"><a href="#我知道的" class="headerlink" title="我知道的"></a>我知道的</h2><p>flex是一种快速方便整理布局的方法，只要一个标签被设为flex，那它所有的子元素也都是flex。但是这个特性并不会继续往下延续。</p>
+<p>flex的默认排序是行排序，即flex-direction中的row。flex-direction:row的排序方法，顾名思义，是一行行横着顺序下来的。其他的排序方法值得一提的是column和他们的逆序row-reverse，column-reverse。具体表现请参考MDN,在此不再赘述。</p>
+<p>在日常中flex box中对其子元素的长度操作的属性有：flex-grow, flex-shrink，对其子元素的排版常用的属性有： flex-wrap，justify-content, align-items。</p>
+<h2 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h2><p>flex-wrap属性的默认值是no-wrap，即默认情况下flex内部元素排成一行。在这种情况下，如果flex-box子元素的总和超过了其父元素的width，那么其内部子元素的宽度将成为一个定值：这个定值刚好让每个子元素按原来的宽度之比把父元素宽度的平分(其实本质是flex-box的宽度不够的时候就会压缩子元素，而这个压缩的设置和flex-shrink有关)。</p>
+<blockquote>
+<p>然后这样就不会出现overflow的情况了，这东西还把我坑了一下，解决方法请见下节</p>
+</blockquote>
+<h2 id="flex-flex-grow-amp-amp-flex-shrink-amp-amp-flex-basis"><a href="#flex-flex-grow-amp-amp-flex-shrink-amp-amp-flex-basis" class="headerlink" title="flex:flex-grow &amp;&amp; flex-shrink&amp;&amp;flex-basis"></a>flex:flex-grow &amp;&amp; flex-shrink&amp;&amp;flex-basis</h2><p>flex-grow（默认：0）：若flex-box内部存在空余空间，则会把多余空间按flex-grow的比例分配给flex-grow不为零的子元素（即宽度膨胀）。</p>
+<p>flex-basis（默认：元素本身的宽度）: 若你将flex-basis设为0px，那么他在flexbox的眼里就是一个宽度为0的元素，这样来其余flex-grow不为0的元素就可以肆意抢占它的空间。</p>
+<p>flex-shrink(默认：1): 之前提到过，当一个flex-box内部的宽度不够的时候，其子元素会被压缩，而这个压缩的相关设置就是有flex-shrink属性来控制的，如果你将一个子元素的flex-shrink属性设置为0,那么这个子元素将不会被压缩(但是相对的，其他保持默认flex-shrink属性的子元素将会被压缩的更加厉害)。</p>
+<p>关于以上三种属性，官方推荐使用flex属性来同样配置，flex属性是这样的：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">flex</span>:<span class="selector-attr">[flex-grow]</span> <span class="selector-attr">[flex-shrink]</span><span class="selector-attr">[flex-basis]</span></span><br></pre></td></tr></table></figure>
+<h2 id="order属性"><a href="#order属性" class="headerlink" title="order属性"></a>order属性</h2><p>flex还有一个平时不怎么用的属性是order。通常来说，在flex-box内部，子元素会按他们在html中的顺序排列，但是设置子元素的order属性可以调换顺序，order的默认值是为0</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><p>综上所述，其实flex-box可以实现的布局相当多，这里贴几个个人使用的小技巧：</p>
+<h3 id="利用flex-basis-flex-grow实现响应式等比元素分布"><a href="#利用flex-basis-flex-grow实现响应式等比元素分布" class="headerlink" title="利用flex-basis+flex-grow实现响应式等比元素分布"></a>利用flex-basis+flex-grow实现响应式等比元素分布</h3><p></p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="duskcloudxu" data-slug-hash="GeZOKQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="flex-test">
+  <span>See the Pen <a href="https://codepen.io/duskcloudxu/pen/GeZOKQ/" target="_blank" rel="noopener">
+  flex-test</a> by duskcloudxu (<a href="https://codepen.io/duskcloudxu" target="_blank" rel="noopener">@duskcloudxu</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="利用flex-grow-flex-order-伪元素实现更加内聚的圣杯布局（这名字挺奇怪的"><a href="#利用flex-grow-flex-order-伪元素实现更加内聚的圣杯布局（这名字挺奇怪的" class="headerlink" title="利用flex-grow+flex-order+伪元素实现更加内聚的圣杯布局（这名字挺奇怪的"></a>利用flex-grow+flex-order+伪元素实现更加内聚的圣杯布局（这名字挺奇怪的</h3><p></p><p class="codepen" data-height="298" data-theme-id="0" data-default-tab="css,result" data-user="duskcloudxu" data-slug-hash="zbqbYG" style="height: 298px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="flex-preview2">
+  <span>See the Pen <a href="https://codepen.io/duskcloudxu/pen/zbqbYG/" target="_blank" rel="noopener">
+  flex-preview2</a> by duskcloudxu (<a href="https://codepen.io/duskcloudxu" target="_blank" rel="noopener">@duskcloudxu</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/flex/" rel="tag"># flex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/03/南京大排档民国美玲粥/" rel="next" title="南京大排档民国美玲粥">
+                <i class="fa fa-chevron-left"></i> 南京大排档民国美玲粥
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/28/初探d3-我的前端可视化工作流程总结/" rel="prev" title="初探d3-我的前端可视化工作流程总结">
+                初探d3-我的前端可视化工作流程总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="duskcloudxu">
+            
+              <p class="site-author-name" itemprop="name">duskcloudxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/duskcloudxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cmbjx1@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <div></div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-box-特性笔记"><span class="nav-number">1.</span> <span class="nav-text">flex-box 特性笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我知道的"><span class="nav-number">1.1.</span> <span class="nav-text">我知道的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-wrap"><span class="nav-number">1.2.</span> <span class="nav-text">flex-wrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-flex-grow-amp-amp-flex-shrink-amp-amp-flex-basis"><span class="nav-number">1.3.</span> <span class="nav-text">flex:flex-grow &amp;&amp; flex-shrink&amp;&amp;flex-basis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order属性"><span class="nav-number">1.4.</span> <span class="nav-text">order属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小技巧"><span class="nav-number">1.5.</span> <span class="nav-text">小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用flex-basis-flex-grow实现响应式等比元素分布"><span class="nav-number">1.5.1.</span> <span class="nav-text">利用flex-basis+flex-grow实现响应式等比元素分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用flex-grow-flex-order-伪元素实现更加内聚的圣杯布局（这名字挺奇怪的"><span class="nav-number">1.5.2.</span> <span class="nav-text">利用flex-grow+flex-order+伪元素实现更加内聚的圣杯布局（这名字挺奇怪的</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duskcloudxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://stultuslibrary.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://duskcloudxu.github.io/2019/02/25/flex-box特性笔记/';
+          this.page.identifier = '2019/02/25/flex-box特性笔记/';
+          this.page.title = 'flex box特性笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://stultuslibrary.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"]  ], processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

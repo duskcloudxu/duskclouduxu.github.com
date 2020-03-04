@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="231n,numpy,索引,入门,indexing,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为了简便的操作，我们必须重新造一个轮子，然后从此以后依着这个轮子的样子造新的轮子。  在完成CS231n的assignment的时候发现对于numpy的基本特性了解不够，于是乎就有了这篇博客。 东问问西找找，就就发现了一个新词叫indexing,大概意思是从数组中取出想要的元素的意思吧。 这篇文章是为了和我一样不想把numpy全部看完一遍就开工的人准备的。  话说为什么numpy不采用传统for">
+<meta name="keywords" content="231n,numpy,索引,入门,indexing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy的几种索引方式">
+<meta property="og:url" content="http://duskcloudxu.github.io/2018/07/26/numpy的几种索引方式/index.html">
+<meta property="og:site_name" content="stultus library">
+<meta property="og:description" content="为了简便的操作，我们必须重新造一个轮子，然后从此以后依着这个轮子的样子造新的轮子。  在完成CS231n的assignment的时候发现对于numpy的基本特性了解不够，于是乎就有了这篇博客。 东问问西找找，就就发现了一个新词叫indexing,大概意思是从数组中取出想要的元素的意思吧。 这篇文章是为了和我一样不想把numpy全部看完一遍就开工的人准备的。  话说为什么numpy不采用传统for">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-29T09:48:29.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="numpy的几种索引方式">
+<meta name="twitter:description" content="为了简便的操作，我们必须重新造一个轮子，然后从此以后依着这个轮子的样子造新的轮子。  在完成CS231n的assignment的时候发现对于numpy的基本特性了解不够，于是乎就有了这篇博客。 东问问西找找，就就发现了一个新词叫indexing,大概意思是从数组中取出想要的元素的意思吧。 这篇文章是为了和我一样不想把numpy全部看完一遍就开工的人准备的。  话说为什么numpy不采用传统for">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://duskcloudxu.github.io/2018/07/26/numpy的几种索引方式/">
+
+
+
+<meta name="google-site-verification" content="_bl10zsYCdhg6gfYlPYwQEJjbwHSQIrDlQlACLW0c3Y">
+
+  <title>numpy的几种索引方式 | stultus library</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">stultus library</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">愚者图书馆</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://duskcloudxu.github.io/2018/07/26/numpy的几种索引方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="duskcloudxu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="stultus library">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">numpy的几种索引方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T17:37:59-07:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/26/numpy的几种索引方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/26/numpy的几种索引方式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>为了简便的操作，我们必须重新造一个轮子，然后从此以后依着这个轮子的样子造新的轮子。</p>
+</blockquote>
+<p>在完成CS231n的assignment的时候发现对于numpy的基本特性了解不够，于是乎就有了这篇博客。</p>
+<p>东问问西找找，就就发现了一个新词叫indexing,大概意思是从数组中取出想要的元素的意思吧。</p>
+<p>这篇文章是为了和我一样不想把numpy全部看完一遍就开工的人准备的。</p>
+<blockquote>
+<p>话说为什么numpy不采用传统for循环而是自己定义了一套新的方法呢…就我看来是因为python是一种相当高级的语言，似乎是用解释器机制的，也就是说其语句的执行效率是比较低的，而numpy的各种数组操作时基于底层语言，即C，所以同样一种操作，在python中用for loop写和全部用numpy提供的向量运算来写速度可以差几百倍（字面意义上的）</p>
+<p>然而这个就让习惯for loop的同学有些不习惯了，这可能是第一个难点吧。</p>
+<p>不过既然numpy被如此广泛的应用，就是说这个机制基本是没有问题的，而indexing既然是用来取代for loop的很大一部分功能，这个机制当然也要很强大，事实呢，也正式如此。</p>
+</blockquote>
+<ol>
+<li><p>单个元素的查询</p>
+<p>这很好说，和所有有数组的语言一样，都是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">2</span>]</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>这样的形式。</p>
+<p>同时支持索引用负值来从后往前提取元素，比如说：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">-2</span>]</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>对于取二维数组中的单个元素，和一维数组中的情况类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape = (<span class="number">2</span>,<span class="number">5</span>) <span class="comment"># now x is 2-dimensional</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">1</span>,<span class="number">3</span>]</span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">1</span>,<span class="number">-1</span>]</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组的切片和跳步</p>
+<p>个人感觉是替代C++中的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=step)</span><br></pre></td></tr></table></figure>
+<p>具体操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">2</span>:<span class="number">5</span>]<span class="comment"># for(i=2;i&lt;5;i++)</span></span><br><span class="line">array([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:<span class="number">-7</span>]<span class="comment">#for(i=n-1-7;i&gt;=0;i--)</span></span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">1</span>:<span class="number">7</span>:<span class="number">2</span>]<span class="comment">#for(i=1;i&lt;7;i+=2)</span></span><br><span class="line">array([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = np.arange(<span class="number">35</span>).reshape(<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>,::<span class="number">3</span>]<span class="comment">#切片和跳步同样也可以用在多维数组上</span></span><br><span class="line">array([[ <span class="number">7</span>, <span class="number">10</span>, <span class="number">13</span>],</span><br><span class="line">       [<span class="number">21</span>, <span class="number">24</span>, <span class="number">27</span>]])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>索引数组索引</p>
+<p>这听起来可能有些绕口，但是这是numpy用到现在相对于C++来说比较方便的功能：使用数组来索引数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.arange(<span class="number">10</span>,<span class="number">1</span>,<span class="number">-1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">10</span>,  <span class="number">9</span>,  <span class="number">8</span>,  <span class="number">7</span>,  <span class="number">6</span>,  <span class="number">5</span>,  <span class="number">4</span>,  <span class="number">3</span>,  <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[np.array([<span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">8</span>])]<span class="comment">#即索引下标为3，3，1，8的数组元素</span></span><br><span class="line">array([<span class="number">7</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">2</span>])<span class="comment">#x[3]=7,x[1]=9,x[8]=2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[np.array([<span class="number">3</span>,<span class="number">3</span>,<span class="number">-3</span>,<span class="number">8</span>])]<span class="comment">#对于负数下标也同样支持</span></span><br><span class="line">array([<span class="number">7</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<p>对于一维数组来说，当索引数组是一个多维数组的时候，其返回结果和多维数组结果一样，结果中每一行等价于索引数组中每一行作为索引数组输入的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[np.array([[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">2</span>,<span class="number">3</span>]])]</span><br><span class="line">array([[<span class="number">9</span>, <span class="number">9</span>],</span><br><span class="line">       [<span class="number">8</span>, <span class="number">7</span>]])</span><br></pre></td></tr></table></figure>
+<p>之前举的例子是一维数组，现在我们把索引数组用到多维数组上面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>y[np.array([<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>]), np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])]</span><br><span class="line">array([ <span class="number">0</span>, <span class="number">15</span>, <span class="number">30</span>])<span class="comment">#即取出[0,0][2,1][4,2]位置的元素</span></span><br></pre></td></tr></table></figure>
+<p>在很多时候这个特性可以替代loop循环帮我们从数组中取出想要的数字，但是需要一定时间的重新思考过程。这也是numpy为了高效付出的代价吧。</p>
+<p>对于不符合格式的输入，会先进行广播操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>y[np.array([<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>]), <span class="number">1</span>]</span><br><span class="line">array([ <span class="number">1</span>, <span class="number">15</span>, <span class="number">29</span>])<span class="comment">#即取出[0,1][2,1][4,1]位置的元素</span></span><br></pre></td></tr></table></figure>
+<p>(numpy中的广播操作还是有些门道的，而且因为广播操作是一个自动进行的操作，所以最好还是对于广播操作的机制有所了解，不然经常会出一些哭笑不得的bug。需要了解的同学可以参照<a href="https://zhuanlan.zhihu.com/p/33318510" target="_blank" rel="noopener">这篇文章</a>)</p>
+</li>
+<li><p>数组内元素筛选</p>
+<p>目前所用到的有两种方式，第一种方式是筛选出所有符合逻辑表达式的元素并放在一个一维的数组里：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = y&gt;<span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y[b]</span><br><span class="line">array([<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">32</span>, <span class="number">33</span>, <span class="number">34</span>])</span><br></pre></td></tr></table></figure>
+<p>第二种方式是将原数组中满足逻辑表达式的元素作出改动，不然就不改动：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = np.arange(<span class="number">35</span>).reshape(<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y[y&gt;<span class="number">10</span>]=<span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>],</span><br><span class="line">       [ <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>],</span><br><span class="line">       [ <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>],</span><br><span class="line">       [ <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>]])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上是我用到的几个numpy比较有用的查询数组的方法，其实基本是从官方文档中找了几个比较实用的加上一点自己搜集到的材料，如果还想进一步研究的话可以参考这里的<a href="https://docs.scipy.org/doc/numpy/user/basics.indexing.html" target="_blank" rel="noopener">官方文档</a>(六级警告)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/231n/" rel="tag"># 231n</a>
+          
+            <a href="/tags/numpy/" rel="tag"># numpy</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
+          
+            <a href="/tags/入门/" rel="tag"># 入门</a>
+          
+            <a href="/tags/indexing/" rel="tag"># indexing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/17/自动机导论与逻辑推断/" rel="next" title="自动机导论与逻辑推断">
+                <i class="fa fa-chevron-left"></i> 自动机导论与逻辑推断
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/01/jupyterNotebook的小技巧/" rel="prev" title="jupyterNotebook的小技巧">
+                jupyterNotebook的小技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="duskcloudxu">
+            
+              <p class="site-author-name" itemprop="name">duskcloudxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/duskcloudxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cmbjx1@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <div></div>
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duskcloudxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://stultuslibrary.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://duskcloudxu.github.io/2018/07/26/numpy的几种索引方式/';
+          this.page.identifier = '2018/07/26/numpy的几种索引方式/';
+          this.page.title = 'numpy的几种索引方式';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://stultuslibrary.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"]  ], processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
